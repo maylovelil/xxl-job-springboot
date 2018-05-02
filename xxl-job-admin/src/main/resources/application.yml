@@ -1,0 +1,45 @@
+server:
+  port: 5555
+
+spring:
+  profiles:
+    active: dev #默认是开发环境      test测试环境  prod 生产环境
+# freemarker模板
+  freemarker:
+    suffix: .ftl
+    request-context-attribute: request
+    content-type: text/html;charset=UTF-8
+    expose-spring-macro-helpers: true
+    expose-request-attributes: true
+    expose-session-attributes: true
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/xxl-job?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: root
+      password: 123456
+      db-name: xxl-job
+      filters: log4j,wall,mergeStat
+mybatis:
+  mapperLocations: classpath:mybatis-mapper/*.xml
+
+xxl:
+  job:
+    mail:
+      password: ma7878729918
+      port: 25
+      host: smtp.163.com
+      sendNick: 《任务调度平台XXL-JOB》
+      username: 15910920083@163.com
+    login:
+      password: 123456
+      username: admin
+    accessToken:
+    i18n:
+
+#logging
+logging:
+  level:
+    root: debug
+    org:
+      springframework: info
+  config: classpath:logback/logback-dev.xml
+  path: /data/logs/job
