@@ -1,4 +1,4 @@
-package com.xxl.job.admin.config;
+package com.xxl.job.admin.core.conf;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;

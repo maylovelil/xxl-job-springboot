@@ -1,4 +1,4 @@
-package com.xxl.job.admin.config;
+package com.xxl.job.admin.core.conf;
 
 import com.xxl.job.admin.controller.interceptor.CookieInterceptor;
 import com.xxl.job.admin.controller.interceptor.PermissionInterceptor;
