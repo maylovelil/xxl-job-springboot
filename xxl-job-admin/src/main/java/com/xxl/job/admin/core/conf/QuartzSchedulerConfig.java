@@ -1,5 +1,8 @@
 package com.xxl.job.admin.core.conf;
 
+import com.xxl.job.admin.core.schedule.XxlJobDynamicScheduler;
+import org.quartz.Scheduler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +20,11 @@ import java.util.Properties;
  */
 @Configuration
 public class QuartzSchedulerConfig {
+    @Autowired
+    DataSource dataSource;
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) throws IOException {
+    public SchedulerFactoryBean schedulerFactoryBean(){
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setOverwriteExistingJobs(true);
         // 延时启动
@@ -29,6 +34,10 @@ public class QuartzSchedulerConfig {
         factory.setQuartzProperties(quartzProperties());
         return factory;
     }
+    @Bean
+    public Scheduler scheduler() {
+        return schedulerFactoryBean().getScheduler();
+    }
 
     /**
      * 加载quartz数据源配置
@@ -37,11 +46,16 @@ public class QuartzSchedulerConfig {
      * @throws IOException
      */
     @Bean
-    public Properties quartzProperties() throws IOException {
-        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
-        propertiesFactoryBean.setLocation(new ClassPathResource("/quartz.properties"));
-        propertiesFactoryBean.afterPropertiesSet();
-        return propertiesFactoryBean.getObject();
+    public Properties quartzProperties(){
+        try {
+            PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+            propertiesFactoryBean.setLocation(new ClassPathResource("/quartz.properties"));
+            propertiesFactoryBean.afterPropertiesSet();
+            return propertiesFactoryBean.getObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

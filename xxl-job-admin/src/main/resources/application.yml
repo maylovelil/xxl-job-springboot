@@ -1,5 +1,5 @@
 server:
-  port: 5555
+  port: 8080
 
 spring:
   profiles:
@@ -20,7 +20,7 @@ spring:
       filters: log4j,wall,mergeStat
 mybatis:
   mapperLocations: classpath:mybatis-mapper/*.xml
-
+---
 xxl:
   job:
     mail:
