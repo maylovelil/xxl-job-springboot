@@ -43,8 +43,6 @@ public class XxlJobDynamicScheduler implements ApplicationContextAware {
 
     @Autowired
     QuartzSchedulerConfig quartzSchedulerConfig;
-    @Autowired
-    DataSource dataSource;
 
     private static final Logger logger = LoggerFactory.getLogger(XxlJobDynamicScheduler.class);
 
